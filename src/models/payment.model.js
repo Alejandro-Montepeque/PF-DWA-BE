@@ -2,7 +2,7 @@ import { db } from "../config/firebase.js";
 import bcrypt from "bcrypt";
 
 export default class Payment {
-  constructor({ userId, cartTotal, address, city, cardNumber, expirationDate, cvc }) {
+  constructor({ userId, cartItems, cartTotal, address, city, cardNumber, expirationDate, cvc }) {
     if (!userId) throw new Error("El pago debe tener un usuario asociado.");
     if (!cartTotal || isNaN(cartTotal)) throw new Error("Monto total inválido.");
     if (!cardNumber || cardNumber.length < 12) throw new Error("Número de tarjeta inválido.");
@@ -10,14 +10,15 @@ export default class Payment {
     if (!cvc || cvc.length < 3) throw new Error("CVC inválido.");
 
     this.userId = userId;
+    this.cartItems = cartItems;
     this.cartTotal = Number(cartTotal);
     this.address = address?.trim();
     this.city = city?.trim();
     this.cardNumber = cardNumber.trim().slice(-4); // Solo guardamos los últimos 4 dígitos
     this.expirationDate = expirationDate;
-    this.createdAt = new Date();
     this.status = "pending"; // pending | completed | failed
     this.cvcHash = null;
+    this.createdAt = new Date();
     this.collection = db.collection("payments");
   }
 
@@ -31,6 +32,7 @@ export default class Payment {
 
     const data = {
       userId: this.userId,
+      cartItems: this.cartItems,
       cartTotal: this.cartTotal,
       address: this.address,
       city: this.city,
