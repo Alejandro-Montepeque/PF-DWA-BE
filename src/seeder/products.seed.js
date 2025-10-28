@@ -53,6 +53,16 @@ export const seedProducts = async (categoryRefs) => {
 
       for (const name of names) {
         try {
+            const existing = await db
+            .collection("products")
+            .where("name", "==", name)
+            .where("categoryId", "==", categoryId)
+            .get();
+
+            if (!existing.empty) {
+                console.log(`Producto "${name}" en "${categoryName}" ya existe, se omite.`);
+                continue;
+            }
           const product = new Product({
             name,
             description: `Producto de la categoría ${categoryName}`,

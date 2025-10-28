@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
 
-// Importar rutas (usa rutas relativas correctas)
+// Importar las rutas configuradas
 import cartRoutes from "./src/routes/cart.routes.js";
 import paymentRoutes from './src/routes/payments.routes.js';
 import productRoutes from './src/routes/products.routes.js';
+import categoryRoutes from './src/routes/category.routes.js';
+import userRouter from './src/routes/user.routes.js';
+
 
 const app = express();
 
@@ -16,10 +19,12 @@ app.use(express.json());
 app.use("/api/cart", cartRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRouter);
 
 // Ruta base de prueba
 app.get("/", (req, res) => {
-  res.send("Servidor corriendo correctamente 🚀");
+  res.send("Servidor corriendo correctamente");
 });
 
 // Puerto
