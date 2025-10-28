@@ -1,4 +1,4 @@
-import db from "../config/firebase.js";
+import { db } from "../config/firebase.js";
 
 // Trae todas las categorías
 export const getCategories = async (_req, res) => {

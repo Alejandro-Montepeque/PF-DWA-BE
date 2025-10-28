@@ -1,5 +1,4 @@
-// src/controllers/products.controller.js
-import db from "../config/firebase.js";
+import { db } from "../config/firebase.js";
 import Product from "../models/product.model.js";
 
 // Agregar producto

@@ -1,4 +1,4 @@
-import db from "../config/firebase.js";
+import { db } from "../config/firebase.js";
 import User from "../models/user.model.js";
 
 // Obtiene todos los usuarios

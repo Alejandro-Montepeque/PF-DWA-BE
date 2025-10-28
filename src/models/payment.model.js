@@ -1,4 +1,4 @@
-import db from "../config/firebase.js";
+import { db } from "../config/firebase.js";
 import bcrypt from "bcrypt";
 
 export default class Payment {
