@@ -1,5 +1,4 @@
 import db from "../config/firebase.js";
-import Category from "../models/category.model.js";
 
 // Trae todas las categorías
 export const getCategories = async (_req, res) => {
